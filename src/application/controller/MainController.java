@@ -2,10 +2,12 @@ package application.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -14,6 +16,7 @@ public class MainController {
 	
 	@FXML HBox mainBox;
 	@FXML HBox newProject;
+	@FXML DatePicker datePicker;
 	
 	/*
 	 * If the back button is pressed, the function to show the homepage is run.
@@ -55,5 +58,9 @@ public class MainController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@FXML public void setCurrentDate() {
+		datePicker.setValue(LocalDate.now());
 	}
 }
