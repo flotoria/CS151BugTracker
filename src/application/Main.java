@@ -1,4 +1,4 @@
-			package application;
+package application;
 	
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -13,7 +13,7 @@ public class Main extends Application {
 	 * When the program is ran, the start function is initially ran.
 	 * 
 	 * @param primaryStage the JavaFX stage
-	 */
+	 */ 
 	@Override
 	public void start(Stage primaryStage) {
 		try {
