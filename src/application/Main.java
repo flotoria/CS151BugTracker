@@ -1,5 +1,9 @@
-package application;
+	package application;
 	
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -29,6 +33,17 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection("jdbc:sqlite:database.db");
+            System.out.println("Database created successfully.");
+            conn.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
 		launch(args);
 	}
 }
