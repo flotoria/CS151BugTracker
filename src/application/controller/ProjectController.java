@@ -25,6 +25,7 @@ public class ProjectController {
 	@FXML TextArea descriptionField;
 	
 	@FXML public void initialize() {
+		datePicker.setValue(LocalDate.now());
 		dataAccess = new ProjectDAO();
 	}
 	
@@ -45,10 +46,6 @@ public class ProjectController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	@FXML public void setCurrentDate() {
-		datePicker.setValue(LocalDate.now());
 	}
 	
 	@FXML public void submit() {
