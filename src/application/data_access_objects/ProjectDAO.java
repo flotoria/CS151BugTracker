@@ -72,11 +72,11 @@ public class ProjectDAO {
 			Statement statement = conn.createStatement();
 			ResultSet set = statement.executeQuery(sql);
 			
-			String dateString = set.getString("startingDate");
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			LocalDate localDate = LocalDate.parse(dateString, formatter);
 			
 			while (set.next()) {
+				String dateString = set.getString("startingDate");
+				LocalDate localDate = LocalDate.parse(dateString, formatter);
 				list.add(new ProjectBean(set.getString("name"),	localDate, set.getString("description")));
 			}
 			
