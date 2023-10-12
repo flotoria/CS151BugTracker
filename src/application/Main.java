@@ -22,7 +22,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			HBox root = (HBox) FXMLLoader.load(getClass().getClassLoader().getResource("view/Main.fxml"));
-			Scene scene = new Scene(root,400,400);
+			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getClassLoader().getResource("css/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -33,17 +33,6 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		Connection conn = null;
-		try {
-			conn = DriverManager.getConnection("jdbc:sqlite:database.db");
-            System.out.println("Database created successfully.");
-            conn.close();
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
 		launch(args);
 	}
 }
