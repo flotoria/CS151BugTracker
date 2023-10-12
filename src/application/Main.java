@@ -11,13 +11,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 
+/**
+ * This is the launcher for the BugTracker application
+ */
 public class Main extends Application {
 	
-	/*
+	/**
 	 * When the program is ran, the start function is initially ran.
-	 * 
 	 * @param primaryStage the JavaFX stage
-	 */ 
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -32,6 +34,10 @@ public class Main extends Application {
 		}
 	}
 	
+	/**
+	 * Launches the project
+	 * @param args	
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

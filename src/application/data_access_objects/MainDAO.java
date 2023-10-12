@@ -11,10 +11,16 @@ import java.util.ArrayList;
 
 import application.java_beans.ProjectBean;
 
+/**
+ * The Data Access Object for the MainController class
+ */
 public class MainDAO {
-	
+	/** An instance of Connection for accessing the database*/
 	private Connection conn = null;
 	
+	/**
+	 * Connects with the database and creates a project table
+	 */
 	public MainDAO() { 
 		try {
 			conn = DriverManager.getConnection("jdbc:sqlite:database.db");
@@ -27,6 +33,10 @@ public class MainDAO {
 		}
 	}
 	
+	/**
+	 * Creates a project table storing project id, name, starting date, and description, unless it already exists
+	 * @throws SQLException	Connection conn is not defined
+	 */
 	private void createProjectTable() throws SQLException {
 		String sql = "CREATE TABLE IF NOT EXISTS ProjectTable (\n"
 				+ "id INTEGER NOT NULL PRIMARY KEY,\n" 
@@ -41,6 +51,10 @@ public class MainDAO {
 		}
 	}
 	
+	/**
+	 * Accesses all projects from the database and returns as an ArrayList
+	 * @return	the ArrayList of projects
+	 */
 	public ArrayList<ProjectBean> fetchAllProjects() {
 		String sql = "SELECT * from ProjectTable";
 		ArrayList<ProjectBean> list = new ArrayList<ProjectBean>();

@@ -11,9 +11,16 @@ import java.util.ArrayList;
 
 import application.java_beans.ProjectBean;
 
+/**
+ * The Data Access Object for the ProjectController class
+ */
 public class ProjectDAO {
+	/** An instance of Connection for accessing the database*/
 	private Connection conn = null;
 	
+	/**
+	 * Connects with the database
+	 */
 	public ProjectDAO() {
 		try {
 			conn = DriverManager.getConnection("jdbc:sqlite:database.db");
@@ -24,11 +31,18 @@ public class ProjectDAO {
 		}
 	}
 	
+	/**
+	 * Returns the connections
+	 * @return	the Connection of ProjectDAO
+	 */
 	public Connection getConnection() {
 		return conn;
 	}
 	
-	
+	/**
+	 * Creates a new project record in the database using the identifiers provided by the ProjectBean
+	 * @param project	the ProjectBean of the project that contains its name, date, and description
+	 */
 	public void createProjectRecord(ProjectBean project) {
 		String date = project.getStartingDate().toString();
 		String name = project.getProjectName();
@@ -45,9 +59,6 @@ public class ProjectDAO {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}	
-	
-	
-	
+	}		
 	
 }

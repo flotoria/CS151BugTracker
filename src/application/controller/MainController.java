@@ -19,39 +19,25 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class MainController {
-	
+	/** HBox for displaying homepage */
 	@FXML HBox mainBox;
-	@FXML HBox newProject;
-	@FXML DatePicker datePicker;
+	
+	/** List of all project names */
 	@FXML ListView<String> projectList;
+	
+	/** Instance of the MainDAO class for data accessing */
 	private MainDAO dataAccess;
 	
+	/**
+	 * Initializes MainDAO and accesses database with all projects
+	 */
 	public void initialize() {
 		dataAccess = new MainDAO();
 		showAllProjects();
 	}
-	/*
-	 * If the back button is pressed, the function to show the homepage is run.
-	 */
-	@FXML public void showHomepage() {
-		URL url = getClass().getClassLoader().getResource("view/Main.fxml");
-		
-		try {
-			// Stage is fetched
-			Stage stage = (Stage) newProject.getScene().getWindow(); 
-			HBox pane1 = (HBox)FXMLLoader.load(url);
-			Scene scene = new Scene(pane1);
-			// Set scene
-			stage.setScene(scene);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 	
-	/*
-	 * If the back button is  pressed, the function to show the new project page is run.
+	/**
+	 * Displays the new project page when the "New Project" button is pressed.
 	 */
 	@FXML public void showNewProjectPage() {
 		
@@ -71,6 +57,9 @@ public class MainController {
 		}
 	}
 	
+	/**
+	 * Takes the collection of projects on the database and displays them
+	 */
 	@FXML public void showAllProjects() {
 		ArrayList<String> list = new ArrayList<String>();
 		ArrayList<ProjectBean> projects = dataAccess.fetchAllProjects();

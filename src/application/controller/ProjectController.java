@@ -15,22 +15,35 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+/**
+ * This is the Controller class for the New Project page
+ */
 public class ProjectController {
-	
+	/** Instance of the ProjectDAO class for data accessing */
 	private ProjectDAO dataAccess;
+
+	/** HBox for displaying the new project page */
 	@FXML HBox newProject;
 
+	/** Text field for entering project name */
 	@FXML TextField nameField;
+	
+	/** Button for entering date */
 	@FXML DatePicker datePicker;
+	
+	/** BText field for entering project description */
 	@FXML TextArea descriptionField;
 	
+	/**
+	 * Initializes ProjectDAO and accesses database with all projects
+	 */
 	@FXML public void initialize() {
 		datePicker.setValue(LocalDate.now());
 		dataAccess = new ProjectDAO();
 	}
-	
-	/*
-	 * If the back button is pressed, the function to show the homepage is run.
+
+	/**
+	 * Displays the homepage when the "Back" button is pressed
 	 */
 	@FXML public void showHomepage() {
 		URL url = getClass().getClassLoader().getResource("view/Main.fxml");
@@ -48,6 +61,10 @@ public class ProjectController {
 		}
 	}
 	
+	/**
+	 * Stores the information entered in the TextFields and DatePicker into a ProjectBean and send 
+	 * it to the database
+	 */
 	@FXML public void submit() {
 		String name = nameField.getText();
 		LocalDate date = datePicker.getValue();
