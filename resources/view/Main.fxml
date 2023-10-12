@@ -12,7 +12,7 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
             <Button layoutX="10.0" layoutY="356.0" mnemonicParsing="false" onAction="#showNewProjectPage" style="-fx-background-color: LIGHTSTEELBLUE;" text="New Project" />
-            <Label layoutX="11.0" layoutY="9.0" text="Home">
+            <Label layoutX="11.0" layoutY="9.0" text="Bug Tracker">
                <font>
                   <Font size="29.0" />
                </font>
