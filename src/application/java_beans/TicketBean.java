@@ -24,6 +24,7 @@ public class TicketBean {
 		this.ticketName = ticketName;
 		this.ticketDescription = ticketDescription;
 		this.project = project;
+		this.ticketID = -1;
 	}
 	
 	public TicketBean(String ticketName, String ticketDescription, ProjectBean project, int ticketID) {

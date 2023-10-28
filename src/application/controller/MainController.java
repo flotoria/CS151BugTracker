@@ -14,8 +14,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
@@ -30,6 +32,12 @@ public class MainController {
 	@FXML ListView<ProjectBean> projectList;
 	
 	@FXML ListView<TicketBean> ticketList;
+	
+	@FXML Label nameLabel;
+	
+	@FXML Label descriptionLabel;
+	
+	@FXML Label dateLabel;
 	
 	/** Instance of the MainDAO class for data accessing */
 	private MainDAO dataAccess;
@@ -108,6 +116,9 @@ public class MainController {
 	@FXML public void clickProject() { 
 		ProjectBean selectedProject = projectList.getSelectionModel().getSelectedItem();
 		if (selectedProject != null) {
+			nameLabel.setText(selectedProject.getProjectName());
+			descriptionLabel.setText(selectedProject.getProjectDescription());
+			dateLabel.setText(selectedProject.getStartingDate().toString());
 			ArrayList<TicketBean> list = dataAccess.fetchTicketsByProjectID(selectedProject.getProjectID());
 			ObservableList<TicketBean> data = FXCollections.observableArrayList(list);
 			ticketList.setItems(data);
@@ -123,5 +134,30 @@ public class MainController {
 			
 		}
 	} 
+	
+	@FXML public void clickTicket() {
+		URL url = getClass().getClassLoader().getResource("view/NewComment.fxml");
+		
+		if (ticketList.getSelectionModel().getSelectedItem() != null) {
+			try {
+				// Stage is fetched
+				Stage stage = (Stage) mainBox.getScene().getWindow(); 
+				
+				FXMLLoader loader = new FXMLLoader(url);
+	            Parent root = loader.load();
+	            CommentController controller = loader.getController();
+	            controller.initAll(ticketList.getSelectionModel().getSelectedItem());
+	            
+				Scene scene = new Scene(root);
+				// Set scene
+				stage.setScene(scene);
+				
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
 
 }

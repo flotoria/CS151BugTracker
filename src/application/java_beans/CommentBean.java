@@ -1,41 +1,49 @@
 package application.java_beans;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class CommentBean {
 	/** Description of the comment */
-	private String commentDescription;
+	private String commentText;
+	private LocalDateTime timestamp;
+	private TicketBean ticket;
 	
 	/**
 	 * Creates a new CommentBean
-	 * @param commentDescription	the description of the new comment
+	 * @param commentText	the description of the new comment
 	 */
-	public CommentBean(String commentDescription) {
-		this.commentDescription = commentDescription;
+	public CommentBean(String commentText, LocalDateTime timestamp, TicketBean ticket) {
+		this.commentText = commentText;
+		this.timestamp = timestamp;
+		this.ticket = ticket;
 	}
 
 	/**
-	 * Returns the comment description as a String
-	 * @return	the comment description
+	 * Returns the comment text as a String
+	 * @return	the comment text
 	 */
-	public String getCommentDescription() {
-		return commentDescription;
+	public String getCommentText() {
+		return commentText;
 	}
 	
 	/**
 	 * Returns the comment starting date as a LocalDate
 	 * @return	the comment starting date
 	 */
-	public LocalDate getStartingDate() {
-		return LocalDate.now();
+	public LocalDateTime getTimestamp() {
+		return timestamp;
+	}
+	
+	public TicketBean getTicket() {
+		return ticket;
 	}
 	
 	/**
-	 * Sets a new description for the comment
-	 * @param newDescription	the new comment description
+	 * Sets a new text for the comment
+	 * @param newText	the new comment text
 	 */
-	public void setCommentDescription(String newDescription) {
-		commentDescription = newDescription;
+	public void setCommentText(String newText) {
+		commentText = newText;
 	}
 
 }

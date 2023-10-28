@@ -23,7 +23,42 @@
       </AnchorPane>
       <AnchorPane prefHeight="402.0" prefWidth="532.0">
          <children>
-            <ListView fx:id="ticketList" layoutX="10.0" layoutY="12.0" prefHeight="378.0" prefWidth="422.0" />
+            <ListView fx:id="ticketList" layoutX="13.0" layoutY="103.0" onMouseClicked="#clickTicket" prefHeight="275.0" prefWidth="416.0" />
+            <Label layoutX="196.0" layoutY="76.0" prefHeight="25.0" prefWidth="50.0" text="Tickets">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="13.0" layoutY="9.0" prefHeight="25.0" prefWidth="95.0" text="Project Name:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="13.0" layoutY="29.0" prefHeight="25.0" prefWidth="132.0" text="Project Description:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="13.0" layoutY="50.0" prefHeight="25.0" prefWidth="132.0" text="Starting Date:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="nameLabel" layoutX="105.0" layoutY="9.0" prefHeight="25.0" prefWidth="95.0" text="Empty">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="descriptionLabel" layoutX="141.0" layoutY="29.0" prefHeight="25.0" prefWidth="95.0" text="Empty">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="dateLabel" layoutX="103.0" layoutY="50.0" prefHeight="25.0" prefWidth="95.0" text="Empty">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

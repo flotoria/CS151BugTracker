@@ -1,35 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
 
-<HBox fx:id="newProject" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ProjectController">
+<HBox fx:id="newComment" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="557.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.CommentController">
    <children>
-      <AnchorPane prefHeight="433.0" prefWidth="406.0">
+      <AnchorPane prefHeight="549.0" prefWidth="552.0">
          <children>
-            <Label layoutX="9.0" layoutY="9.0" text="New Comment">
+            <Label layoutX="9.0" layoutY="9.0" text="Ticket">
                <font>
                   <Font name="System Bold" size="32.0" />
                </font>
             </Label>
-            <Label layoutX="12.0" layoutY="127.0" prefHeight="20.0" prefWidth="200.0" text="Comment">
+            <Label layoutX="15.0" layoutY="454.0" prefHeight="20.0" prefWidth="200.0" text="Comment">
                <font>
-                  <Font size="18.0" />
+                  <Font size="13.0" />
                </font>
             </Label>
-            <Label layoutX="10.0" layoutY="56.0" prefHeight="20.0" prefWidth="200.0" text="Starting Date">
+            <Button layoutX="61.0" layoutY="523.0" mnemonicParsing="false" onAction="#submit" style="-fx-background-color: PALEGREEN;" text="Submit" />
+            <Button layoutX="14.0" layoutY="523.0" mnemonicParsing="false" onAction="#showHomepage" style="-fx-background-color: LIGHTPINK;" text="Back" />
+            <TextArea fx:id="commentField" layoutX="14.0" layoutY="477.0" prefHeight="39.0" prefWidth="382.0" />
+            <ScrollPane layoutX="12.0" layoutY="117.0" prefHeight="334.0" prefWidth="711.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="715.0">
+                     <children>
+                        <TextFlow fx:id="commentArea" layoutY="1.0" prefHeight="382.0" prefWidth="699.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <TextField fx:id="timestampField" editable="false" layoutX="405.0" layoutY="484.0" prefHeight="25.0" prefWidth="124.0" />
+            <Label layoutX="432.0" layoutY="511.0" prefHeight="20.0" prefWidth="68.0" text="Timestamp">
                <font>
-                  <Font size="18.0" />
+                  <Font size="13.0" />
                </font>
             </Label>
-            <Button layoutX="58.0" layoutY="386.0" mnemonicParsing="false" onAction="#submit" style="-fx-background-color: PALEGREEN;" text="Submit" />
-            <Button layoutX="9.0" layoutY="386.0" mnemonicParsing="false" onAction="#showHomepage" style="-fx-background-color: LIGHTPINK;" text="Back" />
-            <TextArea fx:id="descriptionField" layoutX="12.0" layoutY="156.0" prefHeight="212.0" prefWidth="382.0" />
+            <Label layoutX="12.0" layoutY="52.0" text="Ticket Name:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="72.0" text="Description:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="nameLabel" layoutX="92.0" layoutY="52.0" text="Label" />
+            <Label fx:id="descriptionLabel" layoutX="86.0" layoutY="72.0" text="Label" />
+            <Label fx:id="projectLabel" layoutX="60.0" layoutY="92.0" text="Label" />
+            <Label layoutX="12.0" layoutY="92.0" text="Project:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

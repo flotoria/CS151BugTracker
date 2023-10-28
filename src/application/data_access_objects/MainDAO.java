@@ -31,6 +31,8 @@ public class MainDAO {
 	        System.out.println("MainDAO: Project table created successfully or is already created.");
 	        createTicketTable();
 	        System.out.println("MainDAO: Ticket table created successfully or is already created.");
+	        createCommentTable();
+	        System.out.println("MainDAO: Comment table created successfully or is already created.");
 	        conn.close();
 		}
 		catch (SQLException e) {
@@ -71,6 +73,27 @@ public class MainDAO {
 				+ "description TEXT, \n"
 				+ "ProjectID INTEGER, \n"
 				+ "FOREIGN KEY (ProjectID) REFERENCES ProjectTable(id) \n"
+				+ ");";
+		
+		if (conn != null) {
+			Statement statement = conn.createStatement();
+			statement.execute(sql);
+			conn.close();
+		}
+	}
+	
+	/**
+	 * Creates a comment table storing comment text, description, and timestamp, unless it already exists
+	 * @throws SQLException	Connection conn is not defined
+	 */
+	private void createCommentTable() throws SQLException {
+		conn = DriverManager.getConnection("jdbc:sqlite:database.db");
+		String sql = "CREATE TABLE IF NOT EXISTS CommentTable (\n"
+				+ "id INTEGER NOT NULL PRIMARY KEY,\n" 
+				+ "text TEXT, \n"
+				+ "timestamp TIMESTAMP, \n"
+				+ "TicketID INTEGER, \n"
+				+ "FOREIGN KEY (TicketID) REFERENCES TicketTable(id) \n"
 				+ ");";
 		
 		if (conn != null) {
@@ -145,7 +168,6 @@ public class MainDAO {
 	}
 	
 
-	
 	public ArrayList<TicketBean> fetchTicketsByProjectID(int id) {
 
 		String filterByProjectID = String.format("SELECT * FROM TicketTable \n"
