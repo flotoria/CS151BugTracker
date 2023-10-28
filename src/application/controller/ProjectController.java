@@ -41,6 +41,27 @@ public class ProjectController {
 		datePicker.setValue(LocalDate.now());
 		dataAccess = new ProjectDAO();
 	}
+	
+	/**
+	 * Displays the new project page when the "New Project" button is pressed.
+	 */
+	@FXML public void showNewTicketPage() {
+		
+		URL url = getClass().getClassLoader().getResource("view/NewTicket.fxml");
+		
+		try {
+			// Stage is fetched
+			Stage stage = (Stage) newProject.getScene().getWindow(); 
+			HBox pane1 = (HBox)FXMLLoader.load(url);
+			Scene scene = new Scene(pane1);
+			// Set scene
+			stage.setScene(scene);
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Displays the homepage when the "Back" button is pressed

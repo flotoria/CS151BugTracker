@@ -5,18 +5,13 @@ import java.time.LocalDate;
 public class CommentBean {
 	/** Description of the comment */
 	private String commentDescription;
-
-	/** Starting date of the comment */
-	private LocalDate startingDate;
 	
 	/**
 	 * Creates a new CommentBean
-	 * @param startingDate			the starting date of the new comment
 	 * @param commentDescription	the description of the new comment
 	 */
-	public CommentBean(LocalDate startingDate, String commentDescription) {
+	public CommentBean(String commentDescription) {
 		this.commentDescription = commentDescription;
-		this.startingDate = startingDate;
 	}
 
 	/**
@@ -32,7 +27,7 @@ public class CommentBean {
 	 * @return	the comment starting date
 	 */
 	public LocalDate getStartingDate() {
-		return startingDate;
+		return LocalDate.now();
 	}
 	
 	/**
@@ -41,14 +36,6 @@ public class CommentBean {
 	 */
 	public void setCommentDescription(String newDescription) {
 		commentDescription = newDescription;
-	}
-
-	/**
-	 * Sets a new date for the comment
-	 * @param newDate	the new comment date
-	 */
-	public void setStartingDate(LocalDate newDate) {
-		startingDate = newDate;
 	}
 
 }
