@@ -23,7 +23,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="402.0" prefWidth="532.0">
          <children>
-            <ListView fx:id="ticketList" layoutX="10.0" layoutY="12.0" onMouseClicked="#click" prefHeight="378.0" prefWidth="422.0" />
+            <ListView fx:id="ticketList" layoutX="10.0" layoutY="12.0" prefHeight="378.0" prefWidth="422.0" />
          </children>
       </AnchorPane>
    </children>
