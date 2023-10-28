@@ -22,12 +22,23 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+/**
+ * This is the Controller class for the Ticket page
+ */
 public class TicketController {
-	
+	/** HBox for displaying the new ticket page */
 	@FXML HBox newTicket;
+	
+	/** Text field for entering ticket name */
 	@FXML TextField nameField;
+	
+	/** Text field for entering ticket description */
 	@FXML TextArea descriptionField;
+	
+	/** Dropdown selection box for existing projects */
 	@FXML ComboBox<ProjectBean> dropdown;
+
+	/** Instance of the TicketDAO class for data accessing */
 	private TicketDAO dataAccess;
 	
 	
@@ -56,7 +67,7 @@ public class TicketController {
 	}
 	
 	/**
-	 * Displays the homepage when the "Back" button is pressed
+	 * Populates the selection box dropdown with existing projects
 	 */
 	@FXML public void populateDropdown() {
 		ArrayList<ProjectBean> listOfProjects = dataAccess.fetchAllProjects();
@@ -76,6 +87,10 @@ public class TicketController {
 		});
 	}
 	
+	/**
+	 * Stores the information entered in the TextField into a TicketBean and send 
+	 * it to the database
+	 */
 	public void submit() {
 		ProjectBean project = dropdown.getValue();
 		String name = nameField.getText();

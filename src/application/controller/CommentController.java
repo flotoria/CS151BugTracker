@@ -21,24 +21,32 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
+/**
+ * This is the Controller class for the Comment page
+ */
 public class CommentController {
-	/** Instance of the ProjectDAO class for data accessing */
+	/** Instance of the CommentDAO class for data accessing */
 	private CommentDAO dataAccess;
 
-	/** HBox for displaying the new project page */
+	/** HBox for displaying the new comment page */
 	@FXML HBox newComment;
 	
-	/** BText field for entering project description */
+	/** Text area for comment description */
 	@FXML TextArea commentField;
 	
+	/** Text flow for comment description */
 	@FXML TextFlow commentArea;
 
+	/** Text flow for comment timestamp */
 	@FXML TextField timestampField;
 	
+	/** Label for comment name */
 	@FXML Label nameLabel;
 	
+	/** Label for desciption */
 	@FXML Label descriptionLabel;
 	
+	/** Label for project name */
 	@FXML Label projectLabel;
 	private TicketBean ticket;
 	
@@ -52,6 +60,10 @@ public class CommentController {
 		
 	}
 	
+	/**
+	 * Takes the name, description, and project name of the comment's associated ticket and presents it
+	 * @param ticket	the ticket to be associated with this comment
+	 */
 	public void initAll(TicketBean ticket) {
         this.ticket = ticket;
         nameLabel.setText(ticket.getTicketName());
@@ -65,6 +77,10 @@ public class CommentController {
 		}
     }
 	
+	/**
+	 * Stores the information entered in the comment description and and the current date into a 
+	 * CommentBean and send it to the database
+	 */
 	@FXML public void submit() {
 		String text = commentField.getText();
 		LocalDateTime timestamp = LocalDateTime.now();
@@ -76,6 +92,9 @@ public class CommentController {
 		
 	}
 	
+	/**
+	 * Displays the homepage when the "Back" button is pressed
+	 */
 	@FXML public void showHomepage() {
 		URL url = getClass().getClassLoader().getResource("view/Main.fxml");
 		

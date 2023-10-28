@@ -16,7 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
- * This is the Controller class for the New Project page
+ * This is the Controller class for the Project page
  */
 public class ProjectController {
 	/** Instance of the ProjectDAO class for data accessing */

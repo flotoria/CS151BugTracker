@@ -24,19 +24,26 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+/**
+ * This is the Controller class for the Main page
+ */
 public class MainController {
 	/** HBox for displaying homepage */
 	@FXML HBox mainBox;
 	
-	/** List of all project names */
+	/** List of all project beans */
 	@FXML ListView<ProjectBean> projectList;
-	
+
+	/** List of all ticket beans */
 	@FXML ListView<TicketBean> ticketList;
-	
+
+	/** Label for project name */
 	@FXML Label nameLabel;
-	
+
+	/** Label for project description */
 	@FXML Label descriptionLabel;
-	
+
+	/** Label for project date */
 	@FXML Label dateLabel;
 	
 	/** Instance of the MainDAO class for data accessing */
@@ -113,6 +120,9 @@ public class MainController {
 		);
 	}
 	
+	/**
+	 * Displays the project's tickets when clicked on
+	 */
 	@FXML public void clickProject() { 
 		ProjectBean selectedProject = projectList.getSelectionModel().getSelectedItem();
 		if (selectedProject != null) {
@@ -135,6 +145,9 @@ public class MainController {
 		}
 	} 
 	
+	/**
+	 * Displays the ticket's comments when clicked on
+	 */
 	@FXML public void clickTicket() {
 		URL url = getClass().getClassLoader().getResource("view/NewComment.fxml");
 		

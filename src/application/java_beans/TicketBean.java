@@ -1,7 +1,8 @@
 package application.java_beans;
 
-import java.time.LocalDate;
-
+/**
+ * Creates and modifies a TicketBean that is used to communicate with the database
+ */
 public class TicketBean {
 	/** Name of the ticket */
 	private String ticketName;
@@ -11,7 +12,8 @@ public class TicketBean {
 
 	/** Associated project with the ticket */
 	private ProjectBean project;
-	
+
+	/** Unique ID of the ticket */
 	private int ticketID;
 	
 	/**
@@ -27,6 +29,13 @@ public class TicketBean {
 		this.ticketID = -1;
 	}
 	
+	/**
+	 * Creates a new TicketBean
+	 * @param ticketName			the name of the new ticket
+	 * @param ticketDescription		the description of the new ticket
+	 * @param project				the associated project
+	 * @param ticketID				the unique ticketID
+	 */
 	public TicketBean(String ticketName, String ticketDescription, ProjectBean project, int ticketID) {
 		this.ticketName = ticketName;
 		this.ticketDescription = ticketDescription;
@@ -42,6 +51,10 @@ public class TicketBean {
 		return ticketName;
 	}
 
+	/**
+	 * Returns the ticket unique ID
+	 * @return	the ticket ID
+	 */
 	public int getTicketID() {
 		return ticketID;
 	}
@@ -55,8 +68,8 @@ public class TicketBean {
 	}
 	
 	/**
-	 * Returns the ticket description as a String
-	 * @return	the ticket description
+	 * Returns the project associated with the ticket
+	 * @return	the associated project
 	 */
 	public ProjectBean getProjectFromTicket() {
 		return project;
@@ -79,8 +92,8 @@ public class TicketBean {
 	}
 
 	/**
-	 * Sets a new date for the ticket
-	 * @param newDate	the new ticket date
+	 * Sets a project for the ticket
+	 * @param newProject	the project to be associated with the ticket
 	 */
 	public void setProject(ProjectBean newProject) {
 		project = newProject;

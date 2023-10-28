@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import application.java_beans.ProjectBean;
 import application.java_beans.TicketBean;
 
+/**
+ * The Data Access Object for the TicketController class
+ */
 public class TicketDAO {
 	/** An instance of Connection for accessing the database*/
 	private Connection conn = null;
@@ -38,7 +41,7 @@ public class TicketDAO {
 	}
 	
 	/**
-	 * Creates a new project record in the database using the identifiers provided by the TicketBean
+	 * Creates a new ticket record in the database using the identifiers provided by the TicketBean
 	 * @param ticket	the TicketBean of the project that contains its name, date, and description
 	 */
 	public void createTicketRecord(TicketBean ticket) {
@@ -64,7 +67,10 @@ public class TicketDAO {
 	}	
 	
 
-	
+	/**
+	 * Fetches a ticket by searching for their unique project ID
+	 * @param id	the unique ID of a project
+	 */
 	public ProjectBean fetchProjectByID(int id) {
 
 		String filterByProjectID = String.format("SELECT * FROM ProjectTable \n"

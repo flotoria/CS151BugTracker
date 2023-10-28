@@ -136,8 +136,8 @@ public class MainDAO {
 	}
 	
 	/**
-	 * Accesses all projects from the database and returns as an ArrayList
-	 * @return	the ArrayList of projects
+	 * Fetches a project by searching for their unique ID
+	 * @param id	the unique ID of a project
 	 */
 	public ProjectBean fetchProjectByProjectID(int id) {
 		
@@ -168,6 +168,10 @@ public class MainDAO {
 	}
 	
 
+	/**
+	 * Fetches a ticket by searching for their unique project ID
+	 * @param id	the unique ID of a project
+	 */
 	public ArrayList<TicketBean> fetchTicketsByProjectID(int id) {
 
 		String filterByProjectID = String.format("SELECT * FROM TicketTable \n"

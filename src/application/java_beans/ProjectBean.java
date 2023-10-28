@@ -15,7 +15,8 @@ public class ProjectBean implements Serializable {
 
 	/** Starting date of the project */
 	private LocalDate startingDate;
-	
+
+	/** Unique ID of the project */
 	private int projectID;
 	
 	/**
@@ -30,6 +31,13 @@ public class ProjectBean implements Serializable {
 		this.startingDate = startingDate;
 	}
 	
+	/**
+	 * Creates a new ProjectBean
+	 * @param projectName			the name of the new project
+	 * @param startingDate			the starting date of the new project
+	 * @param projectDescription	the description of the new project
+	 * @param projectID				the unique project ID
+	 */
 	public ProjectBean(String projectName, LocalDate startingDate, String projectDescription, int projectID) {
 		this.projectName = projectName;
 		this.projectDescription = projectDescription;
@@ -62,6 +70,10 @@ public class ProjectBean implements Serializable {
 		return startingDate;
 	}
 	
+	/**
+	 * Returns the project unique ID
+	 * @return	the project ID
+	 */
 	public int getProjectID() {
 		return projectID;
 	}

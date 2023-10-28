@@ -15,6 +15,9 @@ import application.java_beans.CommentBean;
 import application.java_beans.ProjectBean;
 import application.java_beans.TicketBean;
 
+/**
+ * The Data Access Object for the CommentController class
+ */
 public class CommentDAO {
 	/** An instance of Connection for accessing the database*/
 	private Connection conn = null;
@@ -41,8 +44,8 @@ public class CommentDAO {
 	}
 	
 	/**
-	 * Creates a new project record in the database using the identifiers provided by the TicketBean
-	 * @param comment	the CommontBean of the project that contains its name and description
+	 * Creates a new comment record in the database using the identifiers provided by the CommentBean
+	 * @param comment	the CommentBean of the project that contains its name and description
 	 */
 	public void createCommentRecord(CommentBean comment) {
 		
@@ -70,8 +73,8 @@ public class CommentDAO {
 
 	
 	/**
-	 * Creates a new project record in the database using the identifiers provided by the TicketBean
-	 * @param comment	the CommontBean of the project that contains its name and description
+	 * Fetches a comment by searching for their unique ticket ID
+	 * @param id	the unique ID of a ticket
 	 */
 	public ArrayList<CommentBean> fetchCommentsByTicket(TicketBean ticket) {
 

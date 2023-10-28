@@ -2,15 +2,24 @@ package application.java_beans;
 
 import java.time.LocalDateTime;
 
+/**
+ * Creates and modifies a CommentBean that is used to communicate with the database
+ */
 public class CommentBean {
 	/** Description of the comment */
 	private String commentText;
+	
+	/** The date and time of the comment's creation */
 	private LocalDateTime timestamp;
+	
+	/** The ticket associated with this comment */
 	private TicketBean ticket;
 	
 	/**
 	 * Creates a new CommentBean
 	 * @param commentText	the description of the new comment
+	 * @param timestamp		the time of the comment's creation
+	 * @param ticket		the ticket associated with this comment
 	 */
 	public CommentBean(String commentText, LocalDateTime timestamp, TicketBean ticket) {
 		this.commentText = commentText;
@@ -34,6 +43,10 @@ public class CommentBean {
 		return timestamp;
 	}
 	
+	/**
+	 * Returns the ticket associated with this comment
+	 * @return	the comment associated with this ticket
+	 */
 	public TicketBean getTicket() {
 		return ticket;
 	}
