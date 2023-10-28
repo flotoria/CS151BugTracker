@@ -9,19 +9,19 @@ public class TicketBean {
 	/** Description of the ticket */
 	private String ticketDescription;
 
-	/** Starting date of the ticket */
-	private LocalDate startingDate;
+	/** Associated project with the ticket */
+	private ProjectBean project;
 	
 	/**
 	 * Creates a new TicketBean
 	 * @param ticketName			the name of the new ticket
-	 * @param startingDate			the starting date of the new ticket
-	 * @param ticketDescription	the description of the new ticket
+	 * @param ticketDescription		the description of the new ticket
+	 * @param project				the associated project
 	 */
-	public TicketBean(String ticketName, LocalDate startingDate, String ticketDescription) {
+	public TicketBean(String ticketName, String ticketDescription, ProjectBean project) {
 		this.ticketName = ticketName;
 		this.ticketDescription = ticketDescription;
-		this.startingDate = startingDate;
+		this.project = project;
 	}
 	
 	/**
@@ -41,11 +41,11 @@ public class TicketBean {
 	}
 	
 	/**
-	 * Returns the ticket starting date as a LocalDate
-	 * @return	the ticket starting date
+	 * Returns the ticket description as a String
+	 * @return	the ticket description
 	 */
-	public LocalDate getStartingDate() {
-		return startingDate;
+	public ProjectBean getProjectFromTicket() {
+		return project;
 	}
 	
 	/**
@@ -68,7 +68,7 @@ public class TicketBean {
 	 * Sets a new date for the ticket
 	 * @param newDate	the new ticket date
 	 */
-	public void setStartingDate(LocalDate newDate) {
-		startingDate = newDate;
+	public void setProject(ProjectBean newProject) {
+		project = newProject;
 	}
 }

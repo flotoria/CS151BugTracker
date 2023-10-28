@@ -36,7 +36,7 @@ public class CommentDAO {
 	 * Creates a new project record in the database using the identifiers provided by the TicketBean
 	 * @param comment	the CommontBean of the project that contains its name and description
 	 */
-	public void createTicketRecord(CommentBean comment) {
+	public void createCommentRecord(CommentBean comment) {
 		String date = comment.getStartingDate().toString();
 		String description = comment.getCommentDescription();
 		
