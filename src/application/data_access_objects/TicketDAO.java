@@ -45,47 +45,25 @@ public class TicketDAO {
 		String name = ticket.getTicketName();
 		String description = ticket.getTicketDescription();
 		ProjectBean project = ticket.getProjectFromTicket();
-		int projectID = -1;
-		
-		String filterByProjectName = String.format("SELECT * FROM ProjectTable \n"
-									+ "WHERE name = '%s'", project.getProjectName());
-		
+	
 	
 		try {
+			conn = DriverManager.getConnection("jdbc:sqlite:database.db");
 			Statement statement = conn.createStatement();
-			ResultSet set = statement.executeQuery(filterByProjectName);
-			projectID = set.getInt("id");
 			String sql = String.format("INSERT INTO " + "TicketTable" 
 					+ " (name, description, ProjectID)"
-					+ " VALUES ('%s', '%s', %s);", name, description, projectID);
+					+ " VALUES ('%s', '%s', %s);", name, description, project.getProjectID());
 			statement.execute(sql);	
 			conn.close();
 			
-			System.out.println("Ticket record created with " + name + ", " + description + ", " + projectID);
+			System.out.println("Ticket record created with " + name + ", " + description + ", " + project.getProjectID());
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}	
 	
-	public int fetchProjectIDByName(String name) {
 
-		String filterByProjectName = String.format("SELECT * FROM ProjectTable \n"
-									+ "WHERE name = '%s'", name);
-		int id = -1;
-		
-		try {
-			Statement statement = conn.createStatement();
-			ResultSet set = statement.executeQuery(filterByProjectName);
-			id = set.getInt("id");
-			System.out.println("TicketDAO: Project ID fetched from name - " + id);
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return id;
-	}	
 	
 	public ProjectBean fetchProjectByID(int id) {
 
@@ -95,6 +73,7 @@ public class TicketDAO {
 		
 		
 		try {
+			conn = DriverManager.getConnection("jdbc:sqlite:database.db");
 			Statement statement = conn.createStatement();
 			ResultSet set = statement.executeQuery(filterByProjectID);
 			
@@ -104,6 +83,7 @@ public class TicketDAO {
 			project = new ProjectBean(set.getString("name"), localDate, set.getString("description"));
 			
 			System.out.println("TicketDAO: Project ID " + id + " fetched.");
+			conn.close();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -117,20 +97,24 @@ public class TicketDAO {
 	 * @return	the ArrayList of projects
 	 */
 	public ArrayList<ProjectBean> fetchAllProjects() {
+		
 		String sql = "SELECT * from ProjectTable";
 		ArrayList<ProjectBean> list = new ArrayList<ProjectBean>();
 		
 		try {
+			conn = DriverManager.getConnection("jdbc:sqlite:database.db");
 			Statement statement = conn.createStatement();
 			ResultSet set = statement.executeQuery(sql);
 			
 			while (set.next()) {
+				int projectID = set.getInt("id");
 				String dateString = set.getString("startingDate");
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				LocalDate localDate = LocalDate.parse(dateString, formatter);
-				list.add(new ProjectBean(set.getString("name"),	localDate, set.getString("description")));
+				list.add(new ProjectBean(set.getString("name"),	localDate, set.getString("description"), projectID));
 			}
 
+			conn.close();
 		
 		}
 		catch (SQLException e) {

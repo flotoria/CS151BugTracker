@@ -12,6 +12,8 @@ public class TicketBean {
 	/** Associated project with the ticket */
 	private ProjectBean project;
 	
+	private int ticketID;
+	
 	/**
 	 * Creates a new TicketBean
 	 * @param ticketName			the name of the new ticket
@@ -24,6 +26,13 @@ public class TicketBean {
 		this.project = project;
 	}
 	
+	public TicketBean(String ticketName, String ticketDescription, ProjectBean project, int ticketID) {
+		this.ticketName = ticketName;
+		this.ticketDescription = ticketDescription;
+		this.project = project;
+		this.ticketID = ticketID;
+	}
+	
 	/**
 	 * Returns the ticket name as a String
 	 * @return	the ticket name
@@ -32,6 +41,10 @@ public class TicketBean {
 		return ticketName;
 	}
 
+	public int getTicketID() {
+		return ticketID;
+	}
+	
 	/**
 	 * Returns the ticket description as a String
 	 * @return	the ticket description

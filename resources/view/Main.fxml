@@ -11,7 +11,7 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="256.0">
          <children>
-            <ListView fx:id="projectList" layoutX="9.0" layoutY="61.0" onMouseClicked="#click" prefHeight="282.0" prefWidth="247.0" />
+            <ListView fx:id="projectList" layoutX="9.0" layoutY="61.0" onMouseClicked="#clickProject" prefHeight="282.0" prefWidth="247.0" />
             <Button layoutX="10.0" layoutY="356.0" mnemonicParsing="false" onAction="#showNewProjectPage" style="-fx-background-color: LIGHTSTEELBLUE;" text="New Project" />
             <Label layoutX="11.0" layoutY="9.0" text="Bug Tracker">
                <font>

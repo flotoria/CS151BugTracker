@@ -4,16 +4,19 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import application.data_access_objects.MainDAO;
 import application.java_beans.ProjectBean;
+import application.java_beans.TicketBean;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -24,9 +27,9 @@ public class MainController {
 	@FXML HBox mainBox;
 	
 	/** List of all project names */
-	@FXML ListView<String> projectList;
+	@FXML ListView<ProjectBean> projectList;
 	
-	@FXML ListView<String> ticketList;
+	@FXML ListView<TicketBean> ticketList;
 	
 	/** Instance of the MainDAO class for data accessing */
 	private MainDAO dataAccess;
@@ -88,24 +91,37 @@ public class MainController {
 	@FXML public void showAllProjects() {
 		
 		ArrayList<ProjectBean> list = dataAccess.fetchAllProjects();
-		
-		ArrayList<String> names = new ArrayList<String>();
-		for (ProjectBean p : list) {
-			names.add(p.getProjectName());
-		}
-		
-		ObservableList<String> data = FXCollections.observableArrayList(names);
+
+		ObservableList<ProjectBean> data = FXCollections.observableArrayList(list);
 		projectList.setItems(data);
+		projectList.setCellFactory(lv -> new ListCell<ProjectBean>() {
+			@Override
+			public void updateItem(ProjectBean project, boolean empty) {
+				super.updateItem(project, empty) ;
+		        setText(empty ? null : project.getProjectName());
+			}
+			
+		}		
+		);
 	}
 	
-	@FXML public void click() { 
-		String selectedButtonName = projectList.getSelectionModel().getSelectedItem();
-		int id = dataAccess.fetchProjectIDByName(selectedButtonName);
-		ArrayList<String> str = dataAccess.fetchTicketNamesByProjectID(id);
-		System.out.println(str);
-		ObservableList<String> data = FXCollections.observableArrayList(str);
-		ticketList.setItems(data);
-
-	}
+	@FXML public void clickProject() { 
+		ProjectBean selectedProject = projectList.getSelectionModel().getSelectedItem();
+		if (selectedProject != null) {
+			ArrayList<TicketBean> list = dataAccess.fetchTicketsByProjectID(selectedProject.getProjectID());
+			ObservableList<TicketBean> data = FXCollections.observableArrayList(list);
+			ticketList.setItems(data);
+			ticketList.setCellFactory(lv -> new ListCell<TicketBean>() {
+				@Override
+				public void updateItem(TicketBean ticket, boolean empty) {
+					super.updateItem(ticket, empty) ;
+			        setText(empty ? null : ticket.getTicketName());
+				}
+				
+			}		
+			);
+			
+		}
+	} 
 
 }
