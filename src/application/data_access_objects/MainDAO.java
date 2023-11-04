@@ -136,6 +136,43 @@ public class MainDAO {
 	}
 	
 	/**
+	 * Accesses all projects from the database containing a certain String in their title and returns as 
+	 * an ArrayList
+	 * @param n	the substring that should be contained by project names
+	 * @return	the ArrayList of projects
+	 */
+	public ArrayList<ProjectBean> fetchCertainProjects(String n) {
+		
+		String sql = "SELECT * from ProjectTable";
+		ArrayList<ProjectBean> list = new ArrayList<ProjectBean>();
+		
+		try {
+			conn = DriverManager.getConnection("jdbc:sqlite:database.db");
+			Statement statement = conn.createStatement();
+			ResultSet set = statement.executeQuery(sql);
+			
+			while (set.next()) {
+				String name = set.getString("name");
+				if(name.contains(n)) {
+					int projectID = set.getInt("id");
+					String dateString = set.getString("startingDate");
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+					LocalDate localDate = LocalDate.parse(dateString, formatter);
+					list.add(new ProjectBean(name, localDate, set.getString("description"), projectID));
+				}
+			}
+
+			conn.close();
+		
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	/**
 	 * Fetches a project by searching for their unique ID
 	 * @param id	the unique ID of a project
 	 */

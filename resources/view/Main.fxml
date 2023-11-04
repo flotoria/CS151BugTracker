@@ -60,7 +60,7 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <TextField layoutX="269.0" layoutY="9.0" onKeyTyped="#searchProjects" promptText="Enter Project Name..." />
+            <TextField fx:id="searchField" layoutX="269.0" layoutY="9.0" onKeyTyped="#searchProjects" promptText="Enter Project Name..." />
          </children>
       </AnchorPane>
    </children>

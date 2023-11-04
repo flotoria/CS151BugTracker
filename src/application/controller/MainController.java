@@ -20,6 +20,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -48,6 +49,9 @@ public class MainController {
 	
 	/** Label for searchBar inputs */
 	@FXML Label searchBar;
+	
+	/** Label for searchBar inputs */
+	@FXML TextField searchField;
 	
 	/** Instance of the MainDAO class for data accessing */
 	private MainDAO dataAccess;
@@ -153,8 +157,9 @@ public class MainController {
 	 * currently identical to showAllProjects
 	 */
 	@FXML public void searchProjects() {
+		String name = searchField.getText();
 		
-		ArrayList<ProjectBean> list = dataAccess.fetchAllProjects();
+		ArrayList<ProjectBean> list = dataAccess.fetchCertainProjects(name);
 
 		ObservableList<ProjectBean> data = FXCollections.observableArrayList(list);
 		projectList.setItems(data);
