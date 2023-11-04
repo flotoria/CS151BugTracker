@@ -46,6 +46,9 @@ public class MainController {
 	/** Label for project date */
 	@FXML Label dateLabel;
 	
+	/** Label for searchBar inputs */
+	@FXML Label searchBar;
+	
 	/** Instance of the MainDAO class for data accessing */
 	private MainDAO dataAccess;
 	
@@ -144,6 +147,27 @@ public class MainController {
 			
 		}
 	} 
+	
+	/**
+	 * Searches for all projects matching the search name
+	 * currently identical to showAllProjects
+	 */
+	@FXML public void searchProjects() {
+		
+		ArrayList<ProjectBean> list = dataAccess.fetchAllProjects();
+
+		ObservableList<ProjectBean> data = FXCollections.observableArrayList(list);
+		projectList.setItems(data);
+		projectList.setCellFactory(lv -> new ListCell<ProjectBean>() {
+			@Override
+			public void updateItem(ProjectBean project, boolean empty) {
+				super.updateItem(project, empty) ;
+		        setText(empty ? null : project.getProjectName());
+			}
+			
+		}		
+		);
+	}
 	
 	/**
 	 * Displays the ticket's comments when clicked on

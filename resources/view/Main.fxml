@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
@@ -59,6 +60,7 @@
                   <Font size="13.0" />
                </font>
             </Label>
+            <TextField layoutX="269.0" layoutY="9.0" onKeyTyped="#searchProjects" promptText="Enter Project Name..." />
          </children>
       </AnchorPane>
    </children>
