@@ -232,4 +232,33 @@ public class MainDAO {
 		return ticketList;
 	}	
 	
+	/**
+	 * Fetches a ticket by searching for their unique project ID
+	 * @param id	the unique ID of a project
+	 * @param n		the substring the ticket title must contain
+	 */
+	public ArrayList<TicketBean> fetchTicketsByName(int id, String n) {
+
+		String filterByProjectID = String.format("SELECT * FROM TicketTable \n"
+									+ "WHERE ProjectID=%s", id);
+
+		ArrayList<TicketBean> ticketList = new ArrayList<TicketBean>();
+		try {
+			conn = DriverManager.getConnection("jdbc:sqlite:database.db");
+			Statement statement = conn.createStatement();
+			ResultSet set = statement.executeQuery(filterByProjectID);
+			while (set.next()) {
+				String name = set.getString("name");
+				if(name.contains(n)) ticketList.add(new TicketBean(set.getString("name"), set.getString("description"), fetchProjectByProjectID(id), set.getInt("id")));
+			}
+			System.out.println("MainDAO: Tickets fetched from id - " + id);
+			conn.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return ticketList;
+	}	
+	
 }

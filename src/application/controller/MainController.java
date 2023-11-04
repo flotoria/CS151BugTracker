@@ -47,11 +47,11 @@ public class MainController {
 	/** Label for project date */
 	@FXML Label dateLabel;
 	
-	/** Label for searchBar inputs */
-	@FXML Label searchBar;
+	/** Label for project search bar inputs */
+	@FXML TextField projectSearchField;
 	
-	/** Label for searchBar inputs */
-	@FXML TextField searchField;
+	/** Label for ticket search bar inputs */
+	@FXML TextField ticketSearchField;
 	
 	/** Instance of the MainDAO class for data accessing */
 	private MainDAO dataAccess;
@@ -154,10 +154,9 @@ public class MainController {
 	
 	/**
 	 * Searches for all projects matching the search name
-	 * currently identical to showAllProjects
 	 */
 	@FXML public void searchProjects() {
-		String name = searchField.getText();
+		String name = projectSearchField.getText();
 		
 		ArrayList<ProjectBean> list = dataAccess.fetchCertainProjects(name);
 
@@ -172,6 +171,34 @@ public class MainController {
 			
 		}		
 		);
+	}
+	
+	/**
+	 * Searches for all projects matching the search name
+	 * currently identical to showAllProjects
+	 */
+	@FXML public void searchTickets() {
+		String name = ticketSearchField.getText();
+		
+		ProjectBean selectedProject = projectList.getSelectionModel().getSelectedItem();
+		if (selectedProject != null) {
+			nameLabel.setText(selectedProject.getProjectName());
+			descriptionLabel.setText(selectedProject.getProjectDescription());
+			dateLabel.setText(selectedProject.getStartingDate().toString());
+			ArrayList<TicketBean> list = dataAccess.fetchTicketsByName(selectedProject.getProjectID(), name);
+			ObservableList<TicketBean> data = FXCollections.observableArrayList(list);
+			ticketList.setItems(data);
+			ticketList.setCellFactory(lv -> new ListCell<TicketBean>() {
+				@Override
+				public void updateItem(TicketBean ticket, boolean empty) {
+					super.updateItem(ticket, empty) ;
+			        setText(empty ? null : ticket.getTicketName());
+				}
+				
+			}		
+			);
+			
+		}
 	}
 	
 	/**

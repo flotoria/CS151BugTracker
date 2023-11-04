@@ -68,7 +68,7 @@ public class TicketDAO {
 	
 
 	/**
-	 * Fetches a ticket by searching for their unique project ID
+	 * Fetches a project by searching for the ticket's unique project ID
 	 * @param id	the unique ID of a project
 	 */
 	public ProjectBean fetchProjectByID(int id) {
