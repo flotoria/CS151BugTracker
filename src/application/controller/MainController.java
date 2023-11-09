@@ -174,8 +174,7 @@ public class MainController {
 	}
 	
 	/**
-	 * Searches for all projects matching the search name
-	 * currently identical to showAllProjects
+	 * Searches for all tickets matching the search name
 	 */
 	@FXML public void searchTickets() {
 		String name = ticketSearchField.getText();
