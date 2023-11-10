@@ -180,12 +180,21 @@ public class MainController {
 	@FXML public void searchTickets() {
 		String name = ticketSearchField.getText();
 		
-		ProjectBean selectedProject = projectList.getSelectionModel().getSelectedItem();
-		if (selectedProject != null) {
-			nameLabel.setText(selectedProject.getProjectName());
-			descriptionLabel.setText(selectedProject.getProjectDescription());
-			dateLabel.setText(selectedProject.getStartingDate().toString());
-			ArrayList<TicketBean> list = dataAccess.fetchTicketsByName(selectedProject.getProjectID(), name);
+		if (name != "") {
+		//	nameLabel.setText(selectedProject.getProjectName());
+		//	descriptionLabel.setText(selectedProject.getProjectDescription());
+		//	dateLabel.setText(selectedProject.getStartingDate().toString());
+			ArrayList<TicketBean> list = dataAccess.fetchTicketsByName(name);
+			
+			ArrayList<ProjectBean> projectList = dataAccess.fetchCertainProjects(name);
+			
+			for (ProjectBean project: projectList) {
+				ArrayList<TicketBean> ticketListFromProject = dataAccess.fetchTicketsByProjectID(project.getProjectID());
+				for (TicketBean aTicket: ticketListFromProject) {
+					list.add(aTicket);
+				}
+			}
+
 			ObservableList<TicketBean> data = FXCollections.observableArrayList(list);
 			ticketList.setItems(data);
 			ticketList.setCellFactory(lv -> new ListCell<TicketBean>() {
@@ -198,6 +207,9 @@ public class MainController {
 			}		
 			);
 			
+		}
+		else {
+			ticketList.setItems(null);
 		}
 	}
 	
