@@ -179,12 +179,21 @@ public class MainController {
 	@FXML public void searchTickets() {
 		String name = ticketSearchField.getText();
 		
-		ProjectBean selectedProject = projectList.getSelectionModel().getSelectedItem();
-		if (selectedProject != null) {
-			nameLabel.setText(selectedProject.getProjectName());
-			descriptionLabel.setText(selectedProject.getProjectDescription());
-			dateLabel.setText(selectedProject.getStartingDate().toString());
-			ArrayList<TicketBean> list = dataAccess.fetchTicketsByName(selectedProject.getProjectID(), name);
+		if (name != "") {
+		//	nameLabel.setText(selectedProject.getProjectName());
+		//	descriptionLabel.setText(selectedProject.getProjectDescription());
+		//	dateLabel.setText(selectedProject.getStartingDate().toString());
+			ArrayList<TicketBean> list = dataAccess.fetchTicketsByName(name);
+			
+			ArrayList<ProjectBean> projectList = dataAccess.fetchCertainProjects(name);
+			
+			for (ProjectBean project: projectList) {
+				ArrayList<TicketBean> ticketListFromProject = dataAccess.fetchTicketsByProjectID(project.getProjectID());
+				for (TicketBean aTicket: ticketListFromProject) {
+					list.add(aTicket);
+				}
+			}
+
 			ObservableList<TicketBean> data = FXCollections.observableArrayList(list);
 			ticketList.setItems(data);
 			ticketList.setCellFactory(lv -> new ListCell<TicketBean>() {
@@ -197,6 +206,9 @@ public class MainController {
 			}		
 			);
 			
+		}
+		else {
+			ticketList.setItems(null);
 		}
 	}
 	
@@ -227,5 +239,35 @@ public class MainController {
 		}
 		
 	}
+	
+	/**
+	 * Displays the ticket's comments when clicked on
+	 */
+	@FXML public void clickSearchTicket() {
+		
+		String name = ticketSearchField.getText();
+		
+		URL url = getClass().getClassLoader().getResource("view/QueriedTickets.fxml");
+		
+		try {
+			// Stage is fetched
+			Stage stage = (Stage) mainBox.getScene().getWindow(); 
+			
+			FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            SearchTicketController controller = loader.getController();
+            controller.initAll(name);
+            
+			Scene scene = new Scene(root);
+			// Set scene
+			stage.setScene(scene);
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+
 
 }
