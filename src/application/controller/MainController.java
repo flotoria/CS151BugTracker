@@ -240,5 +240,35 @@ public class MainController {
 		}
 		
 	}
+	
+	/**
+	 * Displays the ticket's comments when clicked on
+	 */
+	@FXML public void clickSearchTicket() {
+		
+		String name = ticketSearchField.getText();
+		
+		URL url = getClass().getClassLoader().getResource("view/QueriedTickets.fxml");
+		
+		try {
+			// Stage is fetched
+			Stage stage = (Stage) mainBox.getScene().getWindow(); 
+			
+			FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            SearchTicketController controller = loader.getController();
+            controller.initAll(name);
+            
+			Scene scene = new Scene(root);
+			// Set scene
+			stage.setScene(scene);
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+
 
 }
