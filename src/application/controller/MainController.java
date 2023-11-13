@@ -105,6 +105,26 @@ public class MainController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}/**
+	 * Displays the edit project page when the "Edit Project" button is pressed.
+	 * Currently identical to showNewProject
+	 */
+	@FXML public void showEditProjectPage() {
+		
+		URL url = getClass().getClassLoader().getResource("view/NewProject.fxml");
+		
+		try {
+			// Stage is fetched
+			Stage stage = (Stage) mainBox.getScene().getWindow(); 
+			HBox pane1 = (HBox)FXMLLoader.load(url);
+			Scene scene = new Scene(pane1);
+			// Set scene
+			stage.setScene(scene);
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
