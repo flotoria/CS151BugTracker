@@ -190,6 +190,8 @@ public class MainController {
 	 */
 	@FXML public void deleteProject() { 
 		ProjectBean selectedProject = projectList.getSelectionModel().getSelectedItem();
+		int id = selectedProject.getProjectID();
+		dataAccess.deleteProjectByID(id);
 	}
 	
 	/**
