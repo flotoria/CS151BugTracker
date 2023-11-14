@@ -192,6 +192,8 @@ public class MainController {
 		ProjectBean selectedProject = projectList.getSelectionModel().getSelectedItem();
 		int id = selectedProject.getProjectID();
 		dataAccess.deleteProjectByID(id);
+
+		showAllProjects();
 	}
 	
 	/**
