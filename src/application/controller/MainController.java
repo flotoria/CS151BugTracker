@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -56,11 +57,19 @@ public class MainController {
 	/** Instance of the MainDAO class for data accessing */
 	private MainDAO dataAccess;
 	
+	/** Button for project editing */
+	@FXML Button edit;
+	
+	/** Button for project deleting */
+	@FXML Button delete;
+	
 	/**
 	 * Initializes MainDAO and accesses database with all projects
 	 */
 	public void initialize() {
 		dataAccess = new MainDAO();
+		edit.setVisible(false);
+		delete.setVisible(false);
 		showAllProjects();
 		
 	}
@@ -69,6 +78,27 @@ public class MainController {
 	 * Displays the new project page when the "New Project" button is pressed.
 	 */
 	@FXML public void showNewProjectPage() {
+		
+		URL url = getClass().getClassLoader().getResource("view/NewProject.fxml");
+		
+		try {
+			// Stage is fetched
+			Stage stage = (Stage) mainBox.getScene().getWindow(); 
+			HBox pane1 = (HBox)FXMLLoader.load(url);
+			Scene scene = new Scene(pane1);
+			// Set scene
+			stage.setScene(scene);
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Displays the edit project page when the "New Project" button is pressed.
+	 */
+	@FXML public void showEditProjectPage() {
 		
 		URL url = getClass().getClassLoader().getResource("view/NewProject.fxml");
 		
@@ -133,6 +163,9 @@ public class MainController {
 	@FXML public void clickProject() { 
 		ProjectBean selectedProject = projectList.getSelectionModel().getSelectedItem();
 		if (selectedProject != null) {
+			edit.setVisible(true);
+			delete.setVisible(true);
+			
 			nameLabel.setText(selectedProject.getProjectName());
 			descriptionLabel.setText(selectedProject.getProjectDescription());
 			dateLabel.setText(selectedProject.getStartingDate().toString());
@@ -151,6 +184,13 @@ public class MainController {
 			
 		}
 	} 
+	
+	/**
+	 * Deletes chosen project
+	 */
+	@FXML public void deleteProject() { 
+		ProjectBean selectedProject = projectList.getSelectionModel().getSelectedItem();
+	}
 	
 	/**
 	 * Searches for all projects matching the search name
