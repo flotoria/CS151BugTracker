@@ -290,7 +290,29 @@ public class MainDAO {
 	}	
 	
 	public void deleteProjectByID(int id) {
+		//delete tickets of project first
+		ArrayList<TicketBean> projTickets = fetchTicketsByProjectID(id);
+		for(TicketBean t: projTickets) {
+			deleteTicketByID(t.getTicketID());
+		}
+		
 		String sql = "DELETE FROM ProjectTable WHERE id = ?";
+		try {
+			conn = DriverManager.getConnection("jdbc:sqlite:database.db");
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+			System.out.println("Deleted");
+			conn.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteTicketByID(int id) {
+		
+		String sql = "DELETE FROM TicketTable WHERE id = ?";
 		try {
 			conn = DriverManager.getConnection("jdbc:sqlite:database.db");
 			PreparedStatement pstmt = conn.prepareStatement(sql);
