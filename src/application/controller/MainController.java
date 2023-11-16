@@ -96,11 +96,11 @@ public class MainController {
 	}
 	
 	/**
-	 * Displays the edit project page when the "New Project" button is pressed.
+	 * Displays the edit project page when the "Edit" button is pressed.
 	 */
 	@FXML public void showEditProjectPage() {
 		
-		URL url = getClass().getClassLoader().getResource("view/NewProject.fxml");
+		URL url = getClass().getClassLoader().getResource("view/EditProject.fxml");
 		
 		try {
 			// Stage is fetched
