@@ -180,8 +180,7 @@ public class MainController {
 				}
 				
 			}		
-			);
-			
+			);	
 		}
 	} 
 	
@@ -193,6 +192,12 @@ public class MainController {
 		int id = selectedProject.getProjectID();
 		dataAccess.deleteProjectByID(id);
 
+		ticketList.getItems().clear();
+		edit.setVisible(false);
+		delete.setVisible(false);
+		nameLabel.setText("");
+		descriptionLabel.setText("");
+		dateLabel.setText("");
 		showAllProjects();
 	}
 	
