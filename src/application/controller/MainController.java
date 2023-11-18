@@ -103,10 +103,17 @@ public class MainController {
 		URL url = getClass().getClassLoader().getResource("view/EditProject.fxml");
 		
 		try {
+			
+			ProjectBean selectedProject = projectList.getSelectionModel().getSelectedItem();
 			// Stage is fetched
 			Stage stage = (Stage) mainBox.getScene().getWindow(); 
-			HBox pane1 = (HBox)FXMLLoader.load(url);
-			Scene scene = new Scene(pane1);
+			
+			FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            EditProjectController controller = loader.getController();
+            Scene scene = new Scene(root);
+            
+            controller.initAll(selectedProject);
 			// Set scene
 			stage.setScene(scene);
 			
