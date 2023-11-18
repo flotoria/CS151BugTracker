@@ -46,7 +46,9 @@ public class TicketDAO {
 	 */
 	public void createTicketRecord(TicketBean ticket) {
 		String name = ticket.getTicketName();
+		name = name.replace("'", "''");
 		String description = ticket.getTicketDescription();
+		description = description.replace("'", "''");
 		ProjectBean project = ticket.getProjectFromTicket();
 	
 	

@@ -53,6 +53,7 @@ public class CommentDAO {
 		Timestamp sqlTimestamp = Timestamp.valueOf(timestamp);
 		
 		String text = comment.getCommentText();
+		text = text.replace("'", "''");
 		int ticketID = comment.getTicket().getTicketID();
 		
 		String sql = String.format("INSERT INTO " + "CommentTable" 

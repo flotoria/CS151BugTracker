@@ -46,7 +46,9 @@ public class EditProjectDAO {
 	public void editProjectRecord(ProjectBean project) {
 		String date = project.getStartingDate().toString();
 		String name = project.getProjectName();
+		name = name.replace("'", "''");
 		String description = project.getProjectDescription();
+		description = description.replace("'", "''");
 		int id = project.getProjectID();
 		
 		String sql = String.format("UPDATE " + "ProjectTable" 

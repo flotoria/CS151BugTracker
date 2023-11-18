@@ -46,7 +46,9 @@ public class ProjectDAO {
 	public void createProjectRecord(ProjectBean project) {
 		String date = project.getStartingDate().toString();
 		String name = project.getProjectName();
+		name = name.replace("'", "''");
 		String description = project.getProjectDescription();
+		description = description.replace("'", "''");
 		
 		String sql = String.format("INSERT INTO " + "ProjectTable" 
 					+ " (name, startingDate, description)"
