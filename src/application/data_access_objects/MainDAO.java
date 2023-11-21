@@ -327,7 +327,7 @@ public class MainDAO {
 		}
 	}
 	
-public void deleteCommentsByTicketID(int id) {
+	public void deleteCommentsByTicketID(int id) {
 		
 		String sql = "DELETE FROM CommentTable WHERE TicketID = ?";
 		try {
