@@ -312,7 +312,7 @@ public class MainDAO {
 	}
 	
 	public void deleteTicketByID(int id) {
-		
+		deleteCommentsByTicketID(id);
 		String sql = "DELETE FROM TicketTable WHERE id = ?";
 		try {
 			conn = DriverManager.getConnection("jdbc:sqlite:database.db");

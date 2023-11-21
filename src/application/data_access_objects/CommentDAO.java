@@ -107,8 +107,24 @@ public class CommentDAO {
 	}	
 	
 	public void deleteTicketByID(int id) {
-		
+		deleteCommentsByTicketID(id);
 		String sql = "DELETE FROM TicketTable WHERE id = ?";
+		try {
+			conn = DriverManager.getConnection("jdbc:sqlite:database.db");
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+			System.out.println("Deleted");
+			conn.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteCommentsByTicketID(int id) {
+		
+		String sql = "DELETE FROM CommentTable WHERE TicketID = ?";
 		try {
 			conn = DriverManager.getConnection("jdbc:sqlite:database.db");
 			PreparedStatement pstmt = conn.prepareStatement(sql);
