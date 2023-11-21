@@ -13,6 +13,7 @@ import application.java_beans.TicketBean;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -48,6 +49,9 @@ public class CommentController {
 	
 	/** Label for project name */
 	@FXML Label projectLabel;
+	
+	@FXML Button delete;
+	
 	private TicketBean ticket;
 	
 	/**
@@ -76,6 +80,14 @@ public class CommentController {
 			commentArea.getChildren().add(new Text(Timestamp.valueOf(c.getTimestamp()).toString() + ": "+ c.getCommentText() + "\n"));
 		}
     }
+	
+	/**
+	 * Deletes chosen ticket
+	 */
+	@FXML public void deleteTicket() { 
+		dataAccess.deleteTicketByID(ticket.getTicketID());
+		showHomepage();
+	}
 	
 	/**
 	 * Stores the information entered in the comment description and and the current date into a 

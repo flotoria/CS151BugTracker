@@ -2,6 +2,7 @@ package application.data_access_objects;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -104,4 +105,20 @@ public class CommentDAO {
 		
 		return list;
 	}	
+	
+	public void deleteTicketByID(int id) {
+		
+		String sql = "DELETE FROM TicketTable WHERE id = ?";
+		try {
+			conn = DriverManager.getConnection("jdbc:sqlite:database.db");
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+			System.out.println("Deleted");
+			conn.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
