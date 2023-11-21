@@ -12,6 +12,7 @@ import application.java_beans.ProjectBean;
 import application.java_beans.TicketBean;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -86,7 +87,27 @@ public class CommentController {
 	/**
 	 * Edits chosen ticket
 	 */
-	@FXML public void editTicket() { 
+	@FXML public void showEditTicketPage() { 
+		URL url = getClass().getClassLoader().getResource("view/EditTicket.fxml");
+		
+		try {
+			
+			// Stage is fetched
+			Stage stage = (Stage) newComment.getScene().getWindow(); 
+			
+			FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            EditTicketController controller = loader.getController();
+            Scene scene = new Scene(root);
+            
+            controller.initAll(ticket);
+			// Set scene
+			stage.setScene(scene);
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

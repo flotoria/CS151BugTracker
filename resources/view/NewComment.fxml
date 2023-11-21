@@ -61,7 +61,7 @@
                </font>
             </Label>
             <Button fx:id="delete" layoutX="187.0" layoutY="523.0" mnemonicParsing="false" onAction="#deleteTicket" prefHeight="26.0" prefWidth="56.0" style="-fx-background-color: LIGHTSTEELBLUE;" text="Delete" />
-            <Button fx:id="edit" layoutX="127.0" layoutY="523.0" mnemonicParsing="false" onAction="#editTicket" prefHeight="26.0" prefWidth="56.0" style="-fx-background-color: LIGHTSTEELBLUE;" text="Edit" />
+            <Button fx:id="edit" layoutX="127.0" layoutY="523.0" mnemonicParsing="false" onAction="#showEditTicketPage" prefHeight="26.0" prefWidth="56.0" style="-fx-background-color: LIGHTSTEELBLUE;" text="Edit" />
          </children>
       </AnchorPane>
    </children>
