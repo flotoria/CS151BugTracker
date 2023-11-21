@@ -50,6 +50,8 @@ public class CommentController {
 	/** Label for project name */
 	@FXML Label projectLabel;
 	
+	@FXML Button edit;
+	
 	@FXML Button delete;
 	
 	private TicketBean ticket;
@@ -80,6 +82,12 @@ public class CommentController {
 			commentArea.getChildren().add(new Text(Timestamp.valueOf(c.getTimestamp()).toString() + ": "+ c.getCommentText() + "\n"));
 		}
     }
+	
+	/**
+	 * Edits chosen ticket
+	 */
+	@FXML public void editTicket() { 
+	}
 	
 	/**
 	 * Deletes chosen ticket
