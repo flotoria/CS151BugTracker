@@ -40,7 +40,6 @@ public class EditProjectController {
 	 * Initializes ProjectDAO and accesses database with all projects
 	 */
 	@FXML public void initialize() {
-		datePicker.setValue(LocalDate.now());
 		dataAccess = new EditProjectDAO();
 	}
 	
@@ -48,6 +47,7 @@ public class EditProjectController {
 		this.project = project;
 		nameField.setText(project.getProjectName());
 		descriptionField.setText(project.getProjectDescription());
+		datePicker.setValue(project.getStartingDate());
 	}
 	
 	/**
