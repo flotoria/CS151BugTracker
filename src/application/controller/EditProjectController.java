@@ -46,6 +46,8 @@ public class EditProjectController {
 	
 	public void initAll(ProjectBean project) {
 		this.project = project;
+		nameField.setText(project.getProjectName());
+		descriptionField.setText(project.getProjectDescription());
 	}
 	
 	/**
@@ -94,14 +96,8 @@ public class EditProjectController {
 	 */
 	@FXML public void submit() {
 		String name = nameField.getText();
-		if (name.equals("")) {
-			name = project.getProjectName();
-		}
 		LocalDate date = datePicker.getValue();
 		String description = descriptionField.getText();
-		if (description.equals("")) {
-			description = project.getProjectDescription();
-		}
 		int id = project.getProjectID();
 		
 		ProjectBean bean = new ProjectBean(name, date, description, id);

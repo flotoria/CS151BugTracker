@@ -42,6 +42,8 @@ public class EditTicketController {
 	
 	public void initAll(TicketBean ticket) {
 		this.ticket = ticket;
+		nameField.setText(ticket.getTicketName());
+		descriptionField.setText(ticket.getTicketDescription());
 	}
 	
 	/**
@@ -90,13 +92,7 @@ public class EditTicketController {
 	 */
 	@FXML public void submit() {
 		String name = nameField.getText();
-		if (name.equals("")) {
-			name = ticket.getTicketName();
-		}
 		String description = descriptionField.getText();
-		if (description.equals("")) {
-			description = ticket.getTicketDescription();
-		}
 		int id = ticket.getTicketID();
 		
 		TicketBean bean = new TicketBean(name, description, ticket.getProjectFromTicket(), id);
