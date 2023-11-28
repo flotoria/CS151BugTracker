@@ -42,6 +42,7 @@ public class SearchTicketDAO {
 				if(name.contains(n)) ticketList.add(new TicketBean(set.getString("name"), set.getString("description"), fetchProjectByProjectID(set.getInt("ProjectID")), set.getInt("id")));
 			}
 			System.out.println("SearchTicketDAO: All tickets fetched with query '" + n + "'");
+			set.close();
 			conn.close();
 		}
 		catch (SQLException e) {
@@ -72,7 +73,8 @@ public class SearchTicketDAO {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			LocalDate localDate = LocalDate.parse(dateString, formatter);
 			obj = (new ProjectBean(set.getString("name"), localDate, set.getString("description"), projectID));
-
+			
+			set.close();
 			conn.close();
 		
 		}
@@ -101,6 +103,8 @@ public class SearchTicketDAO {
 				ticketList.add(new TicketBean(set.getString("name"), set.getString("description"), fetchProjectByProjectID(id), set.getInt("id")));
 			}
 			System.out.println("SearchTicketDAO: Tickets fetched from id - " + id);
+			
+			set.close();
 			conn.close();
 		}
 		catch (SQLException e) {
@@ -137,6 +141,7 @@ public class SearchTicketDAO {
 				}
 			}
 
+			set.close();
 			conn.close();
 		
 		}

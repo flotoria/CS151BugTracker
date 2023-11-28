@@ -55,9 +55,11 @@ public class EditProjectDAO {
 					+ " SET name='%s', startingDate='%s', description='%s'"
 					+ " WHERE id=%s;", name, date, description, id);
 		try {
+			conn = DriverManager.getConnection("jdbc:sqlite:database.db");
 			Statement statement = conn.createStatement();
 			statement.execute(sql);
 			System.out.println("Project record edited.");
+			conn.close();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();

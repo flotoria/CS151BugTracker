@@ -8,6 +8,7 @@ import application.data_access_objects.EditTicketDAO;
 import application.java_beans.TicketBean;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
@@ -74,11 +75,19 @@ public class EditTicketController {
 		URL url = getClass().getClassLoader().getResource("view/NewComment.fxml");
 		
 		try {
+			
+			TicketBean editedTicket = dataAccess.fetchTicketByTicketID(ticket.getTicketID());
 			// Stage is fetched
 			Stage stage = (Stage) editTicket.getScene().getWindow(); 
-			HBox pane1 = (HBox)FXMLLoader.load(url);
-			Scene scene = new Scene(pane1);
+			FXMLLoader loader = new FXMLLoader(url);
+			Parent root = loader.load();
+	        CommentController controller = loader.getController();
+	        
+	        
+	        controller.initAll(editedTicket);
+	        
 			// Set scene
+	        Scene scene = new Scene(root);
 			stage.setScene(scene);
 			
 		} catch (IOException e) {
@@ -94,7 +103,6 @@ public class EditTicketController {
 		String name = nameField.getText();
 		if(name.equals("")) name = ticket.getTicketName();
 		String description = descriptionField.getText();
-		if(description.equals("")) description = ticket.getTicketDescription();
 		int id = ticket.getTicketID();
 		
 		TicketBean bean = new TicketBean(name, description, ticket.getProjectFromTicket(), id);

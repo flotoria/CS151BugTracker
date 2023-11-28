@@ -91,6 +91,8 @@ public class TicketDAO {
 			project = new ProjectBean(set.getString("name"), localDate, set.getString("description"));
 			
 			System.out.println("TicketDAO: Project ID " + id + " fetched.");
+			
+			set.close();
 			conn.close();
 		}
 		catch (SQLException e) {
@@ -122,6 +124,7 @@ public class TicketDAO {
 				list.add(new ProjectBean(set.getString("name"),	localDate, set.getString("description"), projectID));
 			}
 
+			set.close();
 			conn.close();
 		
 		}

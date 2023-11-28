@@ -97,6 +97,9 @@ public class CommentDAO {
 				
 				list.add(new CommentBean(text, javaTime, ticket));
 			}
+			
+			System.out.println("CommentDAO: Comments fetched.");
+			set.close();
 			conn.close();
 		}
 		catch (SQLException e) {

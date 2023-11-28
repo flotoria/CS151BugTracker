@@ -126,6 +126,7 @@ public class MainDAO {
 				list.add(new ProjectBean(set.getString("name"),	localDate, set.getString("description"), projectID));
 			}
 
+			set.close();
 			conn.close();
 		
 		}
@@ -163,6 +164,7 @@ public class MainDAO {
 				}
 			}
 
+			set.close();
 			conn.close();
 		
 		}
@@ -195,6 +197,7 @@ public class MainDAO {
 			LocalDate localDate = LocalDate.parse(dateString, formatter);
 			obj = (new ProjectBean(set.getString("name"), localDate, set.getString("description"), projectID));
 
+			set.close();
 			conn.close();
 		
 		}
@@ -224,6 +227,8 @@ public class MainDAO {
 				ticketList.add(new TicketBean(set.getString("name"), set.getString("description"), fetchProjectByProjectID(id), set.getInt("id")));
 			}
 			System.out.println("MainDAO: Tickets fetched from id - " + id);
+			
+			set.close();
 			conn.close();
 		}
 		catch (SQLException e) {
@@ -253,6 +258,8 @@ public class MainDAO {
 				if(name.contains(n)) ticketList.add(new TicketBean(set.getString("name"), set.getString("description"), fetchProjectByProjectID(id), set.getInt("id")));
 			}
 			System.out.println("MainDAO: Tickets fetched from id - " + id);
+			
+			set.close();
 			conn.close();
 		}
 		catch (SQLException e) {
@@ -280,6 +287,8 @@ public class MainDAO {
 				if(name.contains(n)) ticketList.add(new TicketBean(set.getString("name"), set.getString("description"), fetchProjectByProjectID(set.getInt("ProjectID")), set.getInt("id")));
 			}
 			System.out.println("MainDAO: All tickets fetched with query '" + n + "'");
+			
+			set.close();
 			conn.close();
 		}
 		catch (SQLException e) {
