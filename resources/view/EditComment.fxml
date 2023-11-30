@@ -11,7 +11,7 @@
    <children>
       <AnchorPane prefHeight="416.0" prefWidth="406.0">
          <children>
-            <Label layoutX="9.0" layoutY="9.0" prefHeight="39.0" prefWidth="200.0" text="Edit Comment">
+            <Label layoutX="9.0" layoutY="9.0" prefHeight="47.0" prefWidth="247.0" text="Edit Comment">
                <font>
                   <Font name="System Bold" size="32.0" />
                </font>
