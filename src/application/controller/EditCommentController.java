@@ -101,6 +101,11 @@ public class EditCommentController {
 		}
 	}
 	
+	@FXML
+	public void delete() {
+		dataAccess.deleteCommentByID(comment.getCommentID());
+		showTicketPage();
+	}
 	
 	
 	/**
@@ -108,12 +113,14 @@ public class EditCommentController {
 	 * it to the database
 	 */
 	@FXML public void submit() {
-		String name = commentText.getText();
-		if(name.equals("")) name = comment.getCommentText();
+		String text= commentText.getText();
 		int id = comment.getCommentID();
 		LocalDateTime timestamp = comment.getTimestamp();
-		
-		CommentBean bean = new CommentBean(name, timestamp, comment.getTicket(), id);
+		if (!text.equals(comment.getCommentText())) {
+			timestamp = LocalDateTime.now();
+			System.out.println("t");
+		}
+		CommentBean bean = new CommentBean(text, timestamp, comment.getTicket(), id);
 		dataAccess.editCommentRecord(bean);
 		showTicketPage();
 		

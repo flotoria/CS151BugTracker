@@ -24,6 +24,7 @@
             <Button layoutX="61.0" layoutY="377.0" mnemonicParsing="false" onAction="#submit" style="-fx-background-color: PALEGREEN;" text="Submit" />
             <Button layoutX="12.0" layoutY="377.0" mnemonicParsing="false" onAction="#showTicketPage" style="-fx-background-color: LIGHTPINK;" text="Back" />
             <TextArea fx:id="commentText" layoutX="12.0" layoutY="83.0" prefHeight="277.0" prefWidth="382.0" />
+            <Button layoutX="121.0" layoutY="377.0" mnemonicParsing="false" onAction="#delete" style="-fx-background-color: LIGHTBLUE;" text="Delete" />
          </children>
       </AnchorPane>
    </children>

@@ -62,7 +62,7 @@
             </Label>
             <Button fx:id="delete" layoutX="187.0" layoutY="523.0" mnemonicParsing="false" onAction="#deleteTicket" prefHeight="26.0" prefWidth="56.0" style="-fx-background-color: LIGHTSTEELBLUE;" text="Delete" />
             <Button fx:id="edit" layoutX="127.0" layoutY="523.0" mnemonicParsing="false" onAction="#showEditTicketPage" prefHeight="26.0" prefWidth="56.0" style="-fx-background-color: LIGHTSTEELBLUE;" text="Edit" />
-            <Label layoutX="492.0" layoutY="93.0" prefHeight="20.0" prefWidth="243.0" text="To edit a comment, click on a comment.">
+            <Label layoutX="432.0" layoutY="92.0" prefHeight="20.0" prefWidth="279.0" text="To edit/delete a comment, click on a comment.">
                <font>
                   <Font size="13.0" />
                </font>
