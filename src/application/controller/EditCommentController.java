@@ -80,17 +80,28 @@ public class EditCommentController {
 		URL url = getClass().getClassLoader().getResource("view/NewComment.fxml");
 		
 		try {
+			
+			TicketBean ticket = comment.getTicket();
+			TicketBean editedTicket = dataAccess.fetchTicketByTicketID(ticket.getTicketID());
 			// Stage is fetched
 			Stage stage = (Stage) editComment.getScene().getWindow(); 
-			HBox pane1 = (HBox)FXMLLoader.load(url);
-			Scene scene = new Scene(pane1);
+			FXMLLoader loader = new FXMLLoader(url);
+			Parent root = loader.load();
+	        CommentController controller = loader.getController();
+	        
+	        
+	        controller.initAll(editedTicket);
+	        
 			// Set scene
+	        Scene scene = new Scene(root);
 			stage.setScene(scene);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 	/**
 	 * Stores the information entered in the TextFields and DatePicker into a ProjectBean and send 

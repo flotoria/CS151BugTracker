@@ -140,8 +140,11 @@ public class CommentController {
 	    CommentBean newComment = new CommentBean(text, timestamp, ticket);
 	    dataAccess.createCommentRecord(newComment);
 
+	    ArrayList<CommentBean> commentList = dataAccess.fetchCommentsByTicket(ticket);
+	    
 	    // Update the ListView with the new comment
-	    commentListView.getItems().add(newComment);
+	    commentListView.getItems().clear();
+	    commentListView.getItems().addAll(commentList);
 		
 	}
 	
