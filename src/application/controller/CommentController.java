@@ -2,20 +2,28 @@ package application.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import application.data_access_objects.CommentDAO;
 import application.java_beans.CommentBean;
 import application.java_beans.ProjectBean;
 import application.java_beans.TicketBean;
+import application.controller.EditCommentController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -37,7 +45,7 @@ public class CommentController {
 	@FXML TextArea commentField;
 	
 	/** Text flow for comment description */
-	@FXML TextFlow commentArea;
+	@FXML ListView<CommentBean> commentListView;
 
 	/** Text flow for comment timestamp */
 	@FXML TextField timestampField;
@@ -62,9 +70,8 @@ public class CommentController {
 	 */
 	@FXML public void initialize() {
 		dataAccess = new CommentDAO();
-		LocalDateTime timestamp = LocalDateTime.now();
-		timestampField.setText(Timestamp.valueOf(timestamp).toString());
-		
+	    LocalDateTime timestamp = LocalDateTime.now();
+	    timestampField.setText(Timestamp.valueOf(timestamp).toString());
 	}
 	
 	/**
@@ -72,18 +79,21 @@ public class CommentController {
 	 * @param ticket	the ticket to be associated with this comment
 	 */
 	public void initAll(TicketBean ticket) {
-        this.ticket = ticket;
-        nameLabel.setText(ticket.getTicketName());
-        descriptionLabel.setText(ticket.getTicketDescription());
-        projectLabel.setText(ticket.getProjectFromTicket().getProjectName());
-        
-        ArrayList<CommentBean> commentList = dataAccess.fetchCommentsByTicket(ticket);
-		
-		for (CommentBean c : commentList) {
-			commentArea.getChildren().add(new Text(Timestamp.valueOf(c.getTimestamp()).toString() + ": "+ c.getCommentText() + "\n"));
-		}
+	    this.ticket = ticket;
+	    nameLabel.setText(ticket.getTicketName());
+	    descriptionLabel.setText(ticket.getTicketDescription());
+	    projectLabel.setText(ticket.getProjectFromTicket().getProjectName());
+
+	    ArrayList<CommentBean> commentList = dataAccess.fetchCommentsByTicket(ticket);
+
+	    // Clear the existing items in the ListView
+	    commentListView.getItems().clear();
+
+	    // Update the ListView with the new comment format
+	    commentListView.getItems().addAll(commentList);
     }
 	
+
 	/**
 	 * Edits chosen ticket
 	 */
@@ -123,13 +133,18 @@ public class CommentController {
 	 * CommentBean and send it to the database
 	 */
 	@FXML public void submit() {
-		String text = commentField.getText();
-		LocalDateTime timestamp = LocalDateTime.now();
-		timestampField.setText(Timestamp.valueOf(timestamp).toString());
-		
-		
-		dataAccess.createCommentRecord(new CommentBean(text, timestamp, ticket));
-		commentArea.getChildren().add(new Text(Timestamp.valueOf(timestamp).toString() + ": "+ text + "\n"));
+	    String text = commentField.getText();
+	    LocalDateTime timestamp = LocalDateTime.now();
+	    timestampField.setText(Timestamp.valueOf(timestamp).toString());
+
+	    CommentBean newComment = new CommentBean(text, timestamp, ticket);
+	    dataAccess.createCommentRecord(newComment);
+
+	    ArrayList<CommentBean> commentList = dataAccess.fetchCommentsByTicket(ticket);
+	    
+	    // Update the ListView with the new comment
+	    commentListView.getItems().clear();
+	    commentListView.getItems().addAll(commentList);
 		
 	}
 	
@@ -151,4 +166,39 @@ public class CommentController {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Displays the edit comment when clicked on (BUGGED)
+	 */
+	@FXML public void clickComment() {
+		URL url = getClass().getClassLoader().getResource("view/EditComment.fxml");
+		
+		System.out.println("Clicked (1)");
+		
+		if (commentListView.getSelectionModel().getSelectedItem() != null) {
+			try {
+				// Stage is fetched
+				Stage stage = (Stage) newComment.getScene().getWindow(); 
+				
+				FXMLLoader loader = new FXMLLoader(url);
+	            Parent root = loader.load();
+	            EditCommentController controller = loader.getController();
+	            CommentBean selectedComment = commentListView.getSelectionModel().getSelectedItem();
+	            if (selectedComment != null) {
+	                controller.initAll(selectedComment);
+	            }
+	            
+				Scene scene = new Scene(root);
+				// Set scene
+				stage.setScene(scene);
+				System.out.println("Clicked (2)");
+				
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
 }

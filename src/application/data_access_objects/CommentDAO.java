@@ -94,8 +94,9 @@ public class CommentDAO {
 				Timestamp sqlTime = set.getTimestamp("timestamp");
 				LocalDateTime javaTime = sqlTime.toLocalDateTime();
 				String text = set.getString("text");
+				int id = set.getInt("id");
 				
-				list.add(new CommentBean(text, javaTime, ticket));
+				list.add(new CommentBean(text, javaTime, ticket, id));
 			}
 			
 			System.out.println("CommentDAO: Comments fetched.");

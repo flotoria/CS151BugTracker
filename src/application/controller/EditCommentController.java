@@ -2,10 +2,16 @@ package application.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
+import application.data_access_objects.EditCommentDAO;
 import application.data_access_objects.EditTicketDAO;
+import application.java_beans.CommentBean;
 import application.java_beans.TicketBean;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,34 +25,53 @@ import javafx.stage.Stage;
 /**
  * This is the Controller class for the Project page
  */
-public class EditTicketController {
+public class EditCommentController {
 	/** Instance of the ProjectDAO class for data accessing */
-	private EditTicketDAO dataAccess;
+	private EditCommentDAO dataAccess;
 
-	/** HBox for displaying the new project page */
-	@FXML HBox editTicket;
+	/** HBox for displaying the new comment page */
+	@FXML HBox editComment;
 
-	/** Text field for entering project name */
-	@FXML TextField nameField;
+	/** Text field for entering comment text */
+	@FXML TextArea commentText;
 	
-	/** BText field for entering project description */
-	@FXML TextArea descriptionField;
 	
-	TicketBean ticket = null;
+	CommentBean comment = null;
 	
 	/**
 	 * Initializes ProjectDAO and accesses database with all projects
 	 */
 	@FXML public void initialize() {
-		dataAccess = new EditTicketDAO();
+		dataAccess = new EditCommentDAO();
+	}
+
+	public void initAll(CommentBean comment) {
+		this.comment = comment;
+		commentText.setText(comment.getCommentText());
 	}
 	
-	public void initAll(TicketBean ticket) {
-		this.ticket = ticket;
-		nameField.setText(ticket.getTicketName());
-		descriptionField.setText(ticket.getTicketDescription());
-	}
 	
+	
+	/**
+	 * Displays the new project page when the "New Project" button is pressed.
+	 */
+	@FXML public void showNewTicketPage() {
+		
+		URL url = getClass().getClassLoader().getResource("view/NewTicket.fxml");
+		
+		try {
+			// Stage is fetched
+			Stage stage = (Stage) editComment.getScene().getWindow(); 
+			HBox pane1 = (HBox)FXMLLoader.load(url);
+			Scene scene = new Scene(pane1);
+			// Set scene
+			stage.setScene(scene);
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Displays the homepage when the "Back" button is pressed
@@ -56,9 +81,10 @@ public class EditTicketController {
 		
 		try {
 			
+			TicketBean ticket = comment.getTicket();
 			TicketBean editedTicket = dataAccess.fetchTicketByTicketID(ticket.getTicketID());
 			// Stage is fetched
-			Stage stage = (Stage) editTicket.getScene().getWindow(); 
+			Stage stage = (Stage) editComment.getScene().getWindow(); 
 			FXMLLoader loader = new FXMLLoader(url);
 			Parent root = loader.load();
 	        CommentController controller = loader.getController();
@@ -75,18 +101,20 @@ public class EditTicketController {
 		}
 	}
 	
+	
+	
 	/**
 	 * Stores the information entered in the TextFields and DatePicker into a ProjectBean and send 
 	 * it to the database
 	 */
 	@FXML public void submit() {
-		String name = nameField.getText();
-		if(name.equals("")) name = ticket.getTicketName();
-		String description = descriptionField.getText();
-		int id = ticket.getTicketID();
+		String name = commentText.getText();
+		if(name.equals("")) name = comment.getCommentText();
+		int id = comment.getCommentID();
+		LocalDateTime timestamp = comment.getTimestamp();
 		
-		TicketBean bean = new TicketBean(name, description, ticket.getProjectFromTicket(), id);
-		dataAccess.editTicketRecord(bean);
+		CommentBean bean = new CommentBean(name, timestamp, comment.getTicket(), id);
+		dataAccess.editCommentRecord(bean);
 		showTicketPage();
 		
 	}

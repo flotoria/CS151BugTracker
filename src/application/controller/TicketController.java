@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import application.data_access_objects.TicketDAO;
+import application.java_beans.CommentBean;
 import application.java_beans.ProjectBean;
 import application.java_beans.TicketBean;
 import application.string_converter.ProjectBeanStringConverter;
@@ -14,9 +15,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -37,6 +40,7 @@ public class TicketController {
 	
 	/** Dropdown selection box for existing projects */
 	@FXML ComboBox<ProjectBean> dropdown;
+	
 
 	/** Instance of the TicketDAO class for data accessing */
 	private TicketDAO dataAccess;
@@ -100,4 +104,5 @@ public class TicketController {
 			showHomepage();
 		}
 	}
+	
 }
