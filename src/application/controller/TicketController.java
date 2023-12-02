@@ -99,7 +99,7 @@ public class TicketController {
 		ProjectBean project = dropdown.getValue();
 		String name = nameField.getText();
 		String description = descriptionField.getText();
-		if (project != null) {
+		if (project != null && !name.equals("")) {
 			dataAccess.createTicketRecord(new TicketBean(name, description, project));
 			showHomepage();
 		}

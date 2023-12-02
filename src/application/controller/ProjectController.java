@@ -90,10 +90,11 @@ public class ProjectController {
 		String name = nameField.getText();
 		LocalDate date = datePicker.getValue();
 		String description = descriptionField.getText();
-		
-		ProjectBean bean = new ProjectBean(name, date, description);
-		dataAccess.createProjectRecord(bean);
-		showHomepage();
+		if (!name.equals("")) {
+			ProjectBean bean = new ProjectBean(name, date, description);
+			dataAccess.createProjectRecord(bean);
+			showHomepage();
+		}
 		
 	}
 }
